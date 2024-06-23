@@ -1,1 +1,55 @@
-<p>meter works!</p>
+<div>
+  <button mat-flat-button color="primary" (click)="addElement()">Add Meter</button>
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef display:none> id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="meterSerialNo">
+      <th mat-header-cell *matHeaderCellDef> Meter Serial No </th>
+      <td mat-cell *matCellDef="let element"> {{element.meterSerialNo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastIndex">
+      <th mat-header-cell *matHeaderCellDef> Last Index </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastIndex}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="voltage">
+      <th mat-header-cell *matHeaderCellDef> Voltage Value </th>
+      <td mat-cell *matCellDef="let element"> {{element.voltageValue}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="current">
+      <th mat-header-cell *matHeaderCellDef > Current Value </th>
+      <td mat-cell *matCellDef="let element"> {{element.currentValue}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="measurementTime">
+      <th mat-header-cell *matHeaderCellDef> Measurement Time </th>
+      <td mat-cell *matCellDef="let element"> {{getFormattedDate(element.measurementTime)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-flat-button color="primary" (click)="editElement(element)">
+          edit
+        </button>
+        <button mat-flat-button color="warn" (click)="deleteElement(element)">
+          delete
+        </button>
+        <button mat-flat-button color="warn" (click)="getreport(element)">
+          get report
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>
